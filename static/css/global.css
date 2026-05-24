@@ -1,0 +1,543 @@
+/* ============================================
+   Modern Responsive Tailwind CSS
+   Cyber Threat Detection System
+   Light Theme - User Friendly Design
+   ============================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+    /* ============================================
+       HTML Base Styles
+       ============================================ */
+    html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        @apply bg-gradient-to-br from-slate-50 via-blue-50 to-teal-50 min-h-screen text-slate-700 font-sans;
+        font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Instrument Serif', serif;
+        @apply font-bold tracking-tight text-slate-800;
+    }
+
+    /* ============================================
+       Custom Scrollbar Styling
+       ============================================ */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        @apply bg-slate-100;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-gradient-to-b from-blue-400 to-teal-500 rounded-full hover:from-blue-500 hover:to-teal-600;
+    }
+
+    /* ============================================
+       Selection & Focus Styling
+       ============================================ */
+    ::selection {
+        @apply bg-blue-500 text-white;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-blue-500;
+    }
+}
+
+@layer components {
+    /* ============================================
+       Container & Layout
+       ============================================ */
+    .container-main {
+        @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8;
+    }
+
+    /* ============================================
+       Header Component
+       ============================================ */
+    .header {
+        @apply relative mb-8 sm:mb-10 lg:mb-12;
+        @apply bg-gradient-to-r from-blue-500/10 via-teal-500/10 to-blue-500/10;
+        @apply border-b-2 border-blue-300/30 backdrop-blur-sm;
+        @apply rounded-2xl p-6 sm:p-8 lg:p-10;
+        @apply shadow-lg;
+    }
+
+    .header-title {
+        @apply text-3xl sm:text-4xl lg:text-5xl font-bold;
+        @apply bg-gradient-to-r from-blue-600 via-teal-500 to-blue-600;
+        @apply bg-clip-text text-transparent mb-2;
+    }
+
+    .header-subtitle {
+        @apply text-sm sm:text-base lg:text-lg text-slate-500;
+        @apply font-light tracking-wide;
+    }
+
+    /* ============================================
+       Card Components
+       ============================================ */
+    .card {
+        @apply bg-gradient-to-br from-white via-slate-50 to-blue-50/30;
+        @apply border border-blue-200/50 backdrop-blur-xl;
+        @apply rounded-2xl shadow-lg p-6 sm:p-8;
+        @apply transition-all duration-300 hover:border-blue-300/50 hover:shadow-xl;
+    }
+
+    .card-title {
+        @apply text-xl sm:text-2xl lg:text-2xl font-bold text-blue-600 mb-4;
+        @apply pb-4 border-b border-blue-200/30;
+        @apply flex items-center gap-2;
+    }
+
+    /* ============================================
+       Stat Card Components
+       ============================================ */
+    .stat-card {
+        @apply bg-gradient-to-br from-white to-blue-50/50;
+        @apply border-2 border-blue-200/50 backdrop-blur-md;
+        @apply rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center;
+        @apply transition-all duration-300;
+        @apply hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-100/50;
+        @apply hover:scale-105;
+    }
+
+    .stat-label {
+        @apply text-xs sm:text-sm uppercase tracking-widest font-semibold;
+        @apply text-slate-500 mb-3;
+    }
+
+    .stat-value {
+        @apply text-3xl sm:text-4xl lg:text-5xl font-bold;
+        @apply text-blue-600 font-serif;
+        @apply my-2 sm:my-3;
+    }
+
+    /* ============================================
+       Grid Layouts - Responsive
+       ============================================ */
+    .grid-stats {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-8 lg:mb-10;
+    }
+
+    .grid-content {
+        @apply grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 lg:mb-10;
+    }
+
+    .grid-buttons {
+        @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4;
+    }
+
+    /* ============================================
+       Button Components - Modern & Responsive
+       ============================================ */
+    .btn {
+        @apply inline-flex items-center justify-center rounded-lg font-semibold;
+        @apply transition-all duration-200 cursor-pointer;
+        @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-50 focus:ring-blue-500;
+        @apply disabled:opacity-50 disabled:cursor-not-allowed;
+        @apply px-4 sm:px-5 lg:px-6 py-2.5 sm:py-3 lg:py-3;
+        @apply text-sm sm:text-sm lg:text-base;
+        @apply hover:shadow-lg hover:shadow-blue-200/50;
+    }
+
+    .btn-primary {
+        @apply bg-gradient-to-r from-blue-500 to-teal-500;
+        @apply text-white border border-blue-400/30;
+        @apply hover:from-blue-600 hover:to-teal-600;
+        @apply hover:border-blue-500/50;
+        @apply shadow-lg shadow-blue-200/50;
+    }
+
+    .btn-secondary {
+        @apply bg-slate-200 text-slate-700 border border-slate-300;
+        @apply hover:bg-slate-300 hover:border-slate-400;
+        @apply hover:text-slate-800;
+    }
+
+    .btn-sample {
+        @apply bg-blue-50/80 border border-blue-200/50 text-blue-700;
+        @apply rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm;
+        @apply transition-all duration-300;
+        @apply hover:bg-blue-500 hover:text-white hover:border-blue-400/50;
+        @apply hover:shadow-lg hover:shadow-blue-200/50;
+        @apply active:scale-95;
+    }
+
+    /* ============================================
+       Form Components - Responsive
+       ============================================ */
+    .form-group {
+        @apply mb-5 sm:mb-6 lg:mb-7;
+    }
+
+    .form-label {
+        @apply block mb-2 sm:mb-3 text-slate-600 font-semibold text-xs sm:text-sm;
+        @apply uppercase tracking-wider;
+    }
+
+    .form-input {
+        @apply w-full px-4 sm:px-5 py-2.5 sm:py-3;
+        @apply bg-white/80 text-slate-700;
+        @apply border border-blue-200/50 rounded-lg;
+        @apply font-mono text-xs sm:text-sm;
+        @apply transition-all duration-300;
+        @apply focus:outline-none focus:border-blue-400/50 focus:ring-4 focus:ring-blue-100/50;
+        @apply focus:bg-white;
+        @apply placeholder-slate-400;
+    }
+
+    .form-input.h-24 {
+        @apply resize-none;
+    }
+
+    /* ============================================
+       Information Box & Alerts
+       ============================================ */
+    .info-box {
+        @apply bg-blue-50 border-l-4 border-blue-400 px-4 sm:px-5 lg:px-6;
+        @apply py-4 rounded-lg text-blue-700 text-xs sm:text-sm leading-relaxed;
+        @apply mb-5 sm:mb-6 lg:mb-8;
+    }
+
+    /* ============================================
+       Chart Component - Responsive
+       ============================================ */
+    .chart-wrapper {
+        @apply relative h-48 sm:h-64 lg:h-72 mt-4 sm:mt-6;
+    }
+
+    /* ============================================
+       Prediction List - Responsive
+       ============================================ */
+    .scrollable-list {
+        @apply max-h-72 sm:max-h-96 overflow-y-auto;
+        @apply space-y-2;
+        @apply pr-2 sm:pr-3;
+    }
+
+    .prediction-item {
+        @apply bg-blue-50/50 border-l-4 border-blue-400;
+        @apply px-3 sm:px-4 py-3 sm:py-4 rounded-lg;
+        @apply text-xs sm:text-sm;
+        @apply transition-all duration-200;
+        @apply hover:bg-blue-100/50 hover:border-blue-500;
+    }
+
+    .prediction-item strong {
+        @apply text-blue-600;
+    }
+
+    /* ============================================
+       Loading Container
+       ============================================ */
+    .loading-container {
+        @apply text-center text-blue-600 p-6 sm:p-8;
+    }
+
+    .loading-container.hidden {
+        display: none;
+    }
+
+    .spinner {
+        @apply w-8 h-8 sm:w-10 sm:h-10;
+        @apply border-4 border-blue-200 border-t-blue-500;
+        @apply rounded-full animate-spin mx-auto mb-4;
+    }
+
+    /* ============================================
+       Result Container - Threat Display
+       ============================================ */
+    .result-container {
+        @apply bg-blue-50/50 border-l-4 border-blue-400;
+        @apply px-4 sm:px-6 py-6 sm:py-8 rounded-xl;
+        @apply mt-6 sm:mt-8 backdrop-blur-sm;
+        @apply transition-all duration-300;
+    }
+
+    .result-container.hidden {
+        display: none;
+    }
+
+    .threat-result-box {
+        @apply p-5 sm:p-7 rounded-lg;
+    }
+
+    .threat-safe {
+        @apply border-l-green-500 bg-green-50;
+    }
+
+    .threat-warning {
+        @apply border-l-amber-500 bg-amber-50;
+    }
+
+    .threat-critical {
+        @apply border-l-red-500 bg-red-50;
+    }
+
+    .threat-type {
+        @apply font-serif font-bold text-lg sm:text-2xl;
+        @apply text-blue-700 mb-2;
+    }
+
+    .threat-confidence {
+        @apply text-slate-600 text-sm sm:text-base;
+        @apply mt-2 sm:mt-3;
+    }
+
+    /* ============================================
+       Input Section - Main Content Area
+       ============================================ */
+    .input-section {
+        @apply bg-gradient-to-br from-white via-slate-50 to-blue-50/30;
+        @apply border border-blue-200/50 backdrop-blur-xl;
+        @apply rounded-2xl shadow-lg;
+        @apply px-5 sm:px-7 lg:px-10 py-7 sm:py-9 lg:py-12;
+    }
+
+    /* ============================================
+       Button Group - Responsive Spacing
+       ============================================ */
+    .button-group {
+        @apply flex flex-col sm:flex-row gap-3 sm:gap-4 flex-wrap;
+    }
+
+    /* ============================================
+       Text Utilities
+       ============================================ */
+    .text-error {
+        @apply text-red-500;
+    }
+
+    .text-success {
+        @apply text-green-600;
+    }
+
+    .text-warning {
+        @apply text-amber-500;
+    }
+
+    .text-muted {
+        @apply text-slate-400 text-xs sm:text-sm;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* ============================================
+       Responsive Utilities
+       ============================================ */
+    .hidden {
+        display: none !important;
+    }
+
+    /* ============================================
+       Color Utilities for Header
+       ============================================ */
+    .bg-slate-800\/40 {
+        background-color: rgba(30, 41, 59, 0.1);
+    }
+
+    .text-gray-400 {
+        color: #9ca3af;
+    }
+
+    .text-gray-500 {
+        color: #6b7280;
+    }
+
+    .text-indigo-400 {
+        color: #818cf8;
+    }
+
+    .text-indigo-300 {
+        color: #a5b4fc;
+    }
+
+    .text-purple-300 {
+        color: #d8b4fe;
+    }
+
+    .text-purple-400 {
+        color: #c084fc;
+    }
+
+    .text-green-300 {
+        color: #bbf7d0;
+    }
+
+    .text-red-300 {
+        color: #fca5a5;
+    }
+
+    .border-indigo-500\/20 {
+        border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .border-indigo-500\/10 {
+        border-color: rgba(99, 102, 241, 0.1);
+    }
+
+    .bg-indigo-500\/20 {
+        background-color: rgba(99, 102, 241, 0.2);
+    }
+
+    .bg-purple-500\/20 {
+        background-color: rgba(168, 85, 247, 0.2);
+    }
+
+    /* ============================================
+       Mobile-Specific Optimizations
+       ============================================ */
+    @media (max-width: 640px) {
+        .container-main {
+            @apply px-3 py-3;
+        }
+
+        .header {
+            @apply rounded-xl p-5;
+        }
+
+        .header-title {
+            @apply text-2xl;
+        }
+
+        .card, .input-section {
+            @apply rounded-xl p-5;
+        }
+
+        .btn {
+            @apply px-4 py-2.5 text-sm;
+            @apply w-full sm:w-auto;
+        }
+
+        .grid-buttons {
+            @apply grid-cols-1;
+        }
+    }
+
+    /* ============================================
+       Tablet Optimizations (640px - 1024px)
+       ============================================ */
+    @media (min-width: 641px) and (max-width: 1024px) {
+        .grid-stats {
+            @apply grid-cols-2;
+        }
+
+        .grid-content {
+            @apply grid-cols-1;
+        }
+    }
+
+    /* ============================================
+       Desktop Optimizations (1024px+)
+       ============================================ */
+    @media (min-width: 1025px) {
+        .header {
+            @apply p-10;
+        }
+
+        .card, .input-section {
+            @apply p-8;
+        }
+
+        .graph {
+            @apply grid-cols-2;
+        }
+    }
+
+    /* ============================================
+       Print Styles (if needed for reports)
+       ============================================ */
+    @media print {
+        body {
+            @apply bg-white text-black;
+        }
+
+        .card, .input-section {
+            @apply border-gray-300 bg-white text-black;
+        }
+    }
+}
+
+/* ============================================
+   Animation Keyframes
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+    }
+}
+
+@layer utilities {
+    .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .slide-in-top {
+        animation: slideInFromTop 0.4s ease-out;
+    }
+
+    .pulse-glow {
+        animation: pulse-glow 2s infinite;
+    }
+
+    /* Custom responsive text sizes */
+    .text-responsive {
+        @apply text-sm sm:text-base lg:text-lg;
+    }
+
+    .text-responsive-lg {
+        @apply text-base sm:text-lg lg:text-xl;
+    }
+
+    /* Custom spacing utilities */
+    .gap-responsive {
+        @apply gap-3 sm:gap-4 lg:gap-6;
+    }
+
+    /* Border utilities */
+    .border-glow {
+        @apply border-blue-300/30 hover:border-blue-400/50 transition-colors;
+    }
+}
+
