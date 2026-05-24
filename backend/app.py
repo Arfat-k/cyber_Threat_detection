@@ -81,11 +81,9 @@ def predict():
         
         features = data["features"]
         
-        # Validate that features is a dict
         if not isinstance(features, dict):
             return jsonify({"error": "'features' must be a dictionary"}), 400
         
-        # Convert string keys to integers if needed
         new_features = {}
         for k, v in features.items():
             if isinstance(k, str) and k.isdigit():
@@ -94,7 +92,6 @@ def predict():
                 new_features[k] = v
         features = new_features
         
-        # Make prediction
         result = predictor.predict(features)
 
         if _prediction_failed(result):
@@ -102,7 +99,6 @@ def predict():
                 result = {"error": "Prediction failed", "success": False}
             return jsonify(result), _prediction_error_status(result)
 
-        # Store successful predictions in history only
         history_entry = {
             "timestamp": datetime.now().isoformat(),
             "prediction": result.get("prediction"),
@@ -117,7 +113,6 @@ def predict():
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 
 @app.route("/api/model-info", methods=["GET"])
@@ -139,11 +134,7 @@ def feature_schema():
 
 @app.route("/api/predict-flow", methods=["POST"])
 def predict_flow():
-    """
-    Predict threat class from raw flow telemetry.
-
-    Clients can send high-level flow fields instead of the full 41-feature array.
-    """
+    """Predict threat class from raw flow telemetry."""
     try:
         flow = request.json or {}
         features = flow_adapter.to_features(flow)
@@ -190,12 +181,10 @@ def metrics():
         predictions = [h.get("prediction") for h in history_copy if h.get("prediction")]
         confidences = [float(h.get("confidence") or 0.0) for h in history_copy]
 
-        # Count by attack type
         attack_counts = {}
         for pred in predictions:
             attack_counts[pred] = attack_counts.get(pred, 0) + 1
 
-        # Sort by count
         attack_counts = dict(sorted(attack_counts.items(), key=lambda x: x[1], reverse=True))
 
         return jsonify({
@@ -220,16 +209,12 @@ def submit_row():
     try:
         data = request.json or {}
         
-        # If features provided directly
         if 'features' in data:
             features = data['features']
-            # Validate that features is a dict
             if not isinstance(features, dict):
                 return jsonify({'error': "'features' must be a dictionary"}), 400
         elif 'row' in data:
-            # parse CSV row string
             row_str = data['row']
-            # Validate that row_str is a string
             if not isinstance(row_str, str):
                 return jsonify({'error': "'row' must be a string"}), 400
             reader = csv.reader([row_str])
@@ -239,7 +224,6 @@ def submit_row():
         else:
             return jsonify({'error': "Provide 'features' JSON or a CSV 'row' string."}), 400
 
-        # normalize keys
         new_features = {}
         for k, v in features.items():
             if isinstance(k, str) and k.isdigit():
@@ -254,7 +238,6 @@ def submit_row():
                 result = {"error": "Prediction failed", "success": False}
             return jsonify(result), _prediction_error_status(result)
 
-        # Store successful predictions in history only
         history_entry = {
             'timestamp': datetime.now().isoformat(),
             'features': new_features,
@@ -287,7 +270,6 @@ def get_samples():
             with open(fpath, 'r') as f:
                 rows = list(csv.reader(f))
             
-            # Parse first row as example
             if rows:
                 first_row = rows[0]
                 samples.append({
@@ -300,8 +282,6 @@ def get_samples():
         return jsonify({'samples': samples})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
 
 
 @app.errorhandler(404)
@@ -328,5 +308,4 @@ if __name__ == "__main__":
     print("Dashboard: http://localhost:5000/dashboard")
     print("API: http://localhost:5000/api/model-info")
     print("=" * 60)
-    
-    app.run(debug=False, host="127.0.0.1", port=5000, use_reloader=False)
+    app.run(debug=False, host="0.0.0.0", port=5000, use_reloader=False)

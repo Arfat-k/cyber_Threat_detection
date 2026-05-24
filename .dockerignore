@@ -1,0 +1,12 @@
+@"
+.venv/
+venv/
+__pycache__/
+*.pyc
+.git/
+data/
+*.pcapng
+*.pcap
+node_modules/
+*.docx
+"@ | Out-File -FilePath ".dockerignore" -Encoding utf8
